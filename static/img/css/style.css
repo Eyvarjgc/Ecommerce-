@@ -1,0 +1,8 @@
+.navmain{
+    background-color: rgb(55, 55, 55);
+}
+.flex{
+    display: flex;
+    flex-direction: row;
+    gap: 3;
+}
