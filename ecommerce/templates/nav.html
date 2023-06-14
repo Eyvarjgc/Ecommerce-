@@ -9,14 +9,15 @@
     <div class="container">
         <ul class="flex">
             
-            <li><a href="#"></a>Delivery</li>
-            <li><a href="#"></a>ubicacion</li>
-            <li><a href="#"></a>Sobre nosotros</li>
-            <li><a href="#"></a>Contactenos</li>
+            <li><a href="{%url 'delivery'%}">Delivery</a></li>
+            <li><a href="#">ubicacion</a></li>
+            <li><a href="#">Sobre nosotros</a></li>
+            <li><a href="#">Contactenos</a></li>
             
-            {%if request.user.is_autheticated%}
-            <li><a href="#"></a>Perfil</li>
+            {%if request.user.is_authenticated%}
+            <li><a href="#">Perfil</a></li>
             <li><a href="{%url 'LogoutUser' %}">Logout</a></li>
+            <li><a href="{%url 'addproduct' %}">add-product</a></li>
             {%else%}        
             <li><a href="{%url 'login' %}">iniciar sesion</a></li>
             <li><a href="{% url 'register' %}">Registrarse</a></li>

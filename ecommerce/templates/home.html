@@ -1,3 +1,27 @@
 {%extends 'base.html'%}
 {%load static%}
 
+{%block content%}
+
+{%if request.user.is_authenticated%}
+
+<h1>you are a authenthicated user<h1>
+
+{%endif%}
+
+<div class="container-products">
+{%for products in product%}
+
+    <form action="" mehod="GET">
+        <div class="products">
+            <img class="products-image"src="{{products.image.url}}" alt="Image">
+            {{products.name}}
+            {{products.price}}
+            <input type="submit" value="save" name="save{{products.id}}" >
+        </div>
+    </form>
+
+{%endfor%}
+</div>
+
+{%endblock%}
