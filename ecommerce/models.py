@@ -16,7 +16,7 @@ class CustomUser(AbstractUser):
 
 class Product(models.Model):
     name = models.CharField(("Nombre"), max_length=50,null=True)
-    price = models.FloatField(("Precio"),null=True)
+    price = models.DecimalField(("Precio"), max_digits=5, decimal_places=2)
     image = models.ImageField(("Imagen"), upload_to='static/media', height_field=None, width_field=None, max_length=None,null=True)
     # list = models.ManyToManyField(car, verbose_name=_(""))
 

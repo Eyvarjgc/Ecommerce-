@@ -13,30 +13,43 @@
                 {{ProductsLists.product}}
                 {{ProductsLists.product.price}}
                 
+                <form action="" method="POST">
+                    {%csrf_token%}
                 <!-- Button trigger modal -->
-                <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <input type="button" class="btn " data-bs-toggle="modal" data-bs-target="#exampleModal" name="" value="Eliminar"> 
+                    
+                
+                
+
+                <!-- <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#exampleModal" name="delete{{ProductsLists.id}}">
                     Eliminar
-                </button>
+                </button> -->
+
                 
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title text-danger" id="exampleModalLabel">Esta seguro de eliminar {{ProductsLists.product}} de la lista??</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title text-danger" id="exampleModalLabel">{{ProductsLists.product}} se eliminara de la lista</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <input type="submit" class="btn btn-primary" name="{{ProductsLists.id}}" value="Eliminar">
+
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary">Eliminar</button>
                         </div>
                     </div>
-                    </div>
-                </div>
+                </form>
 
             </div>
 
         {%endfor%}
 
-
+            <h1>Resumen del pedido</h1>
+            <p>Subtotal: {{ProductsLists}} </p> 
+            <a href="#">COMPRAR AHORA</a>
 {%endblock%}

@@ -27,6 +27,30 @@ def home(request):
     return render(request,'home.html',context)
 
 
+def delivery(request):
+    Listproduct = car.objects.all()
+    # Priceproduct = car.
+
+    if request.method == 'POST':
+        for i in Listproduct:
+            # if request.POST.get('delete' + str(i.id)):
+            if request.POST.get(str(i.id)): 
+                n = str(i.id)
+                print(n)
+                Idproduct = car.objects.get(id = n)
+                print(f"{Idproduct}  {Idproduct.id}")
+
+        #         Idproduct.delete()
+
+
+    context = {
+        'ProductsList':Listproduct
+    }
+    return render(request,'delivery.html',context)
+
+
+
+
 def login(request):
     return render(request,'registration/login.html')
 
@@ -54,15 +78,6 @@ def LogoutUser(request):
     logout(request)
     return redirect(home)
 
-
-def delivery(request):
-    ProductsList = car.objects.all()
-
-
-    context = {
-        'ProductsList':ProductsList
-    }
-    return render(request,'delivery.html',context)
 
 
 def addproduct(request):
