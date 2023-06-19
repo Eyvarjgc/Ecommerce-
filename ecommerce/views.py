@@ -27,7 +27,7 @@ def home(request):
     return render(request,'home.html',context)
 
 
-def delivery(request):
+def carrito(request):
     Listproduct = car.objects.all()
     # Priceproduct = car.
 
@@ -46,7 +46,7 @@ def delivery(request):
     context = {
         'ProductsList':Listproduct
     }
-    return render(request,'delivery.html',context)
+    return render(request,'carrito.html',context)
 
 
 

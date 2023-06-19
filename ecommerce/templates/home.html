@@ -3,22 +3,35 @@
 
 {%block content%}
 
-{%if request.user.is_authenticated%}
+{% comment %} {%if request.user.is_authenticated%}
 
 <h1>you are a authenthicated user<h1>
 
-{%endif%}
+{%endif%} {% endcomment %}
+<div class="firstbg">
+    <div class="col-6">
+        <h1>Texto de ejemplo</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, non tempora recusandae ratione quibusdam iste vel </p>
+    </div>
+    <div class="col-6 firstbg-image">
+        
+    </div>
 
-<div class="container-products">
+
+</div>
+<div class="container-products p-4">
 {%for products in product%}
 
     <form action="" mehod="GET">
         <div class="products">
             <img class="products-image"src="{{products.image.url}}" alt="Image">
-            {{products.name}}
-            {{products.price}}
-            <input type="submit" value="save" name="save{{products.id}}" >
+            <p>{{products.name}}</p>
+            <p class="fw-bold">${{products.price}}</p>
         </div>
+        <div class="save">
+            <input type="submit" value="AGREGAR AL CARRITO" name="save{{products.id}}" >
+        </div>
+        
     </form>
 
 {%endfor%}

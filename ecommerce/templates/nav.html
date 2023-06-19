@@ -5,29 +5,34 @@
 
 
 
-<nav class="navmain">
-    <div class="container">
-        <ul class="flex">
+<nav class="navmain navbar navbar-expand bg-body-tertiary">
+        <ul class="flex navbar-nav col-md-12 p-3">
+                <div class="col-md-9 d-flex flex-row flex-wrap">         
+                        <li class="nav-item "><a class="nav-link "  href="{%url 'home'%}">Home</a></li>
+                        <li class="nav-item "><a class="nav-link"  href="#">ubicacion</a></li>
+                        <li class="nav-item "><a class="nav-link"  href="#">Sobre nosotros</a></li>
+                        <li class="nav-item "><a class="nav-link"  href="#">Contactenos</a></li>
+                </div>  
+                <div class="col-md-3 d-flex flex-row flex-wrap">
+                {%if request.user.is_authenticated%}
+                
+                        <li class="nav-item "><a class="nav-link"  href="{%url 'carrito'%}">Carrito</a></li>
+                        <li class="nav-item "><a class="nav-link"  href="#">Perfil</a></li>
+                
+                        <!-- <li class="nav-item "><a class="nav-link"  href="{%url 'LogoutUser' %}">Logout</a></li> -->
+                        <!-- <li class="nav-item "><a class="nav-link"  href="{%url 'addproduct' %}">add-product</a></li> -->
+                
+                {%else%}        
+                
+                <li class="nav-item "><a class="nav-link"  href="{%url 'login' %}">iniciar sesion</a></li>
+                <li class="nav-item "><a class="nav-link"  href="{% url 'register' %}">Registrarse</a></li>
+                <!--  <li class="nav-item "><a class="nav-link"  href="{%url 'LogoutUser' %}">Logout</a></li> -->
+                
+                {%endif%}
+                </div>
+        </ul>    
 
-            <li><a href="{%url 'home'%}">home</a></li>
-            <li><a href="{%url 'delivery'%}">Delivery</a></li>
-            <li><a href="#">ubicacion</a></li>
-            <li><a href="#">Sobre nosotros</a></li>
-            <li><a href="#">Contactenos</a></li>
-            
-            {%if request.user.is_authenticated%}
-            <li><a href="#">Perfil</a></li>
-            <li><a href="{%url 'LogoutUser' %}">Logout</a></li>
-            <li><a href="{%url 'addproduct' %}">add-product</a></li>
-            {%else%}        
-            <li><a href="{%url 'login' %}">iniciar sesion</a></li>
-            <li><a href="{% url 'register' %}">Registrarse</a></li>
-            <li><a href="{%url 'LogoutUser' %}">Logout</a></li>
 
-            {%endif%}
-
-        </ul>
-    </div>
 </nav>
 
 

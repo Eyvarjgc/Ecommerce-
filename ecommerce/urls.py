@@ -9,6 +9,6 @@ urlpatterns = [
     path('LogoutUser/',views.LogoutUser,name="LogoutUser"),
 
     # PAGES
-    path('delivery/', views.delivery,name='delivery'),
+    path('carrito/', views.carrito,name='carrito'),
     path('addproduct/',views.addproduct,name="addproduct"),
 ]
