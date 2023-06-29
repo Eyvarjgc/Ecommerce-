@@ -5,34 +5,49 @@
 
 
 
-<nav class="navmain navbar navbar-expand bg-body-tertiary">
-        <ul class="flex navbar-nav col-md-12 p-3">
-                <div class="col-md-9 d-flex flex-row flex-wrap">         
-                        <li class="nav-item "><a class="nav-link "  href="{%url 'home'%}">Home</a></li>
-                        <li class="nav-item "><a class="nav-link"  href="#">ubicacion</a></li>
-                        <li class="nav-item "><a class="nav-link"  href="#">Sobre nosotros</a></li>
-                        <li class="nav-item "><a class="nav-link"  href="#">Contactenos</a></li>
-                </div>  
-                <div class="col-md-3 d-flex flex-row flex-wrap">
-                {%if request.user.is_authenticated%}
-                
-                        <li class="nav-item "><a class="nav-link"  href="{%url 'carrito'%}">Carrito</a></li>
-                        <li class="nav-item "><a class="nav-link"  href="#">Perfil</a></li>
-                
-                        <!-- <li class="nav-item "><a class="nav-link"  href="{%url 'LogoutUser' %}">Logout</a></li> -->
-                        <!-- <li class="nav-item "><a class="nav-link"  href="{%url 'addproduct' %}">add-product</a></li> -->
-                
-                {%else%}        
-                
-                <li class="nav-item "><a class="nav-link"  href="{%url 'login' %}">iniciar sesion</a></li>
-                <li class="nav-item "><a class="nav-link"  href="{% url 'register' %}">Registrarse</a></li>
-                <!--  <li class="nav-item "><a class="nav-link"  href="{%url 'LogoutUser' %}">Logout</a></li> -->
-                
-                {%endif%}
+<nav class="containernav">
+        <ul class="containernav__ul">
+                <div class="containernav__ul__logo">
+                        <img src="{%static 'images/logo.png'%}" alt="logo">
                 </div>
-        </ul>    
-
-
+                <div class="containernav__ul__centeritem">
+                        <li class=" "><a class="nav-link linka"  href="{%url 'home'%}">Inicio</a></li>
+                        <li class=" "><a class="nav-link linka"  href="#">ubicacion</a></li>
+                        <li class=" "><a class="nav-link linka"  href="#">Sobre nosotros</a></li>
+                        <li class=""><a class="nav-link linka"  href="#">Contactenos</a></li>
+                        <li class="">
+                                <form action="{%url 'home' %}" method="GET">
+                                        <input type="text" name="search" placeholder="Buscar elemento">
+                                </form>
+                        </li>
+                </div>
+                
+                        {%if request.user.is_authenticated%}
+                        <div class="containernav__ul__enditem">
+                                <li class="">
+                                        <a class="containerimg"  href="{%url 'carrito'%}"><span>{{CarCount}}</span><img src="{%static 'images/carrito.png'%}" alt="car"></a>
+                                </li>
+                                <li class="">
+                                        <a class=""  href="{%url 'profile' user.id %}">
+                                                <img class="UserProfileImg"src="{{request.user.avatar.url}}" alt="">
+                                        </a>
+                                </li>
+                        
+                                <!-- <li class="nav-item "><a class="nav-link"  href="{%url 'addproduct' %}">add-product</a></li> -->
+                        </div>      
+                
+                        {%else%}        
+                        <div class="containernav__ul__centeritem">  
+                                <li class=" ">
+                                        <a class="nav-link linka"  href="{%url 'login' %}">iniciar sesion</a>
+                                </li>
+                                <li class="">
+                                        <a class="nav-link linka"    href="{% url 'register' %}">Registrarse</a>
+                                </li>      
+                        </div>                  
+                        {%endif%}
+                
+        </ul>  
 </nav>
 
 

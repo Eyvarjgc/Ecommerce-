@@ -2,39 +2,51 @@
 {%load static%}
 
 {%block content%}
-
-{% comment %} {%if request.user.is_authenticated%}
-
-<h1>you are a authenthicated user<h1>
-
-{%endif%} {% endcomment %}
-<div class="firstbg">
-    <div class="col-6">
-        <h1>Texto de ejemplo</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, non tempora recusandae ratione quibusdam iste vel </p>
+<div class="containerhero">
+    <div class="containerhero__gridwords">
+        <div class="containerhero__gridwords__words">
+        <span>${{favoriteproduct.price}}</span>
+        <h1>{{favoriteproduct.name}}</h1>
+        <p>Artista: {{favoriteproduct.artist}}</p>
+        </div>
     </div>
-    <div class="col-6 firstbg-image">
-        
+    <div class="containerhero__favproduct">
+        <img src="{{favoriteproduct.image.url}}" alt="Producto">
     </div>
-
-
 </div>
-<div class="container-products p-4">
-{%for products in product%}
 
+<div class="containergenre">
+    {%for eachgenre in genre%}
+    
+        <a href="{% url 'genre' eachgenre.id %}">{{eachgenre.name}}</a>
+    
+    {%endfor%}
+</div>
+
+<div class="container-products">
+{%for products in product%}
     <form action="" mehod="GET">
         <div class="products">
-            <img class="products-image"src="{{products.image.url}}" alt="Image">
-            <p>{{products.name}}</p>
-            <p class="fw-bold">${{products.price}}</p>
-        </div>
-        <div class="save">
-            <input type="submit" value="AGREGAR AL CARRITO" name="save{{products.id}}" >
-        </div>
-        
-    </form>
+            <a class="products__containerimage" href="{% url 'detail' products.id %}">
+                <img class="products__containerimage__image"src="{{products.image.url}}" alt="Image">
+            </a>
+            <div class="products__containertext">
+                <p>{{products.artist}} - {{products.name}}</p>
+                <p class="price">${{products.price}}</p>
+                
+            </div>
 
+            <div class="save">
+                <form method="get" action="{% url 'updateamount' %}">
+                    <input class="amount" type="number" name="cantidad" value="{{ products.amount }}" min="1">
+                </form>
+                <input class="enviar"type="submit" value="AÑADIR" name="save{{products.id}}" >
+            </div>
+        </div>
+    </form>
 {%endfor%}
 </div>
+
+<script src="{%static 'js/contador.js'%}"></script>
 
 {%endblock%}

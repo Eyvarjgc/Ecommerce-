@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{%block content%}
+
+
+<div class="container-products">
+    
+    {%for products in Listproduct%}
+    
+        <form action="" mehod="GET">
+            <div class="products">
+                <img class="products-image" src="{{products.image.url}}" alt="Image">
+                <p>{{products.artist}}</p>
+                <p>{{products.name}}</p>
+                <p class="fw-bold">${{products.price}}</p>
+            </div>
+            <div class="save">
+                <input type="submit" value="AÑADIR" name="save{{products.id}}" >
+            </div>
+            
+        </form>
+    
+    {%endfor%}
+    </div>
+
+{%endblock%}

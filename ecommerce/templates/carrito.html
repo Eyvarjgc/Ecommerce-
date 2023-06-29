@@ -3,53 +3,36 @@
 
 {%block content%}
 
-    <div class="container-products">
-
+<div class="containercar">
+    <div class="containercar__items">
         {%for ProductsLists in ProductsList%}
-
-            <div class="products">
-
-                <img class="products-image"src="{{ProductsLists.product.image.url}}" alt="Image">
-                {{ProductsLists.product}}
-                {{ProductsLists.product.price}}
-                
-                <form action="" method="POST">
-                    {%csrf_token%}
-                <!-- Button trigger modal -->
-                <input type="button" class="btn " data-bs-toggle="modal" data-bs-target="#exampleModal" name="" value="Eliminar"> 
-                    
-                
-                
-
-                <!-- <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#exampleModal" name="delete{{ProductsLists.id}}">
-                    Eliminar
-                </button> -->
-
-                
-                <!-- Modal -->
-                
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title text-danger" id="exampleModalLabel">{{ProductsLists.product}} se eliminara de la lista</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <input type="submit" class="btn btn-primary" name="{{ProductsLists.id}}" value="Eliminar">
-
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </form>
-
+        <div class="containercar__items__flex">
+            <div class="containercar__items__flex__containerimg">
+                <img class="carimg"src="{{ProductsLists.product.image.url}}" alt="Image">
             </div>
-
+            <div class="containercar__items__flex__name">
+                <p>{{ProductsLists.product}}  {{ProductsLists.product.price}}</p>
+                <p>cantidad {{ProductsLists.caramount}}</p>
+                <p class="">Total {{ntotal}}</p>
+            </div>
+            <form class="containercar__items__flex__form" action="" method='POST'>
+                {%csrf_token%}
+                <input class="btn btn-dark" type="submit" value='Eliminar' name=eliminar{{ProductsLists.id}}> 
+                
+            </form>
+            
+        </div>
         {%endfor%}
-
+    </div>
+    <div class="containercar__total">
+        <div class="containercar__total__flex">
             <h1>Resumen del pedido</h1>
-            <p>Subtotal: {{ProductsLists}} </p> 
+            <p>TOTAL: <span>{{PriceProduct}}</span> </p> 
             <a href="#">COMPRAR AHORA</a>
+        </div>
+        
+
+    </div>
+</div>
+
 {%endblock%}

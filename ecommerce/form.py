@@ -3,7 +3,8 @@ from django.forms import ModelForm
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-
+from django.contrib.auth.forms import SetPasswordForm,AuthenticationForm,PasswordResetForm
+from django.contrib.auth import get_user_model
 # Creacion de usuario
 class RegisterUser(UserCreationForm):
     email = forms.EmailField(label="Email")
@@ -17,4 +18,11 @@ class ProductForm(ModelForm):
         model = Product
         fields = '__all__'
 
+class changepassword(SetPasswordForm):
+    class Meta:
+        model = get_user_model()
+        fields = ['newpassword1', 'newpassword2']
 
+class PasswordResetForm(PasswordResetForm):
+    def __init__(self,*args,**kwargs):
+        super(PasswordResetForm, self).__init__(*args,**kwargs)

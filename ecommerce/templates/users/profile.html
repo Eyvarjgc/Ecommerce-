@@ -3,6 +3,7 @@
 
 {%block content%}
 
+{{user}}
 <li class="nav-item "><a class="nav-link"  href="{%url 'LogoutUser' %}">Logout</a></li>
-
+<a href="{%url 'password_reset' %}">Cambiar contraseña</a>
 {%endblock%}

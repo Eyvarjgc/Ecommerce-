@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+
+
+{%block content%}
+
+
+
+
+    <form action="" mehod="GET">
+        <div class="detailproduct">
+            <img class="products-image"src="{{product.image.url}}" alt="Image">
+            <p>Artista</p>
+            <p>{{product.artist}}</p>
+            <p>Album</p>
+            <p>{{product.name}}</p>
+            <p>Genero musical</p>
+            <p>{{genre}}</p>
+            <p>Duracion</p>
+            <p>{{product.duration}}</p>
+            <p>Fecha de lanzamiento</p>
+            <p>{{product.releasedate}}</p>
+            <p class="fw-bold">${{product.price}}</p>
+        
+            <input type="submit" value="AÑADIR" name="save{{product.id}}" >
+
+        </div>
+    </form>
+
+<section>
+    <h1>Evaluacion de clientes</h1>
+    {%for coments in coment%}
+
+    <p>{{coments.host}}</p>
+    <p>{{coments.body}}</p>
+    <p>{{coments.created|timesince}}</p>
+
+    {%endfor%}
+    <form action="" method='POST'>
+        <!-- {{comentpost}} -->
+        {%csrf_token%}
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Comentar</label>
+            <textarea name="body"class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <input class="btn btn-primary" type="submit" value="Submit">
+        </div>
+    </form>
+</section>
+
+
+{%endblock%}
