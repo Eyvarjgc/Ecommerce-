@@ -1,13 +1,80 @@
 {%extends 'base.html' %}
-
+{%load widget_tweaks %}
+{%load static%}
 {%block content%}
 
-<form action="" method="POST" enctype="multipart/form-data">
-    {%csrf_token%}
+<div class="addcontainer">
+    <div class="addcontainer__img">
+        <img src="{% static 'images/addimg.jpg' %}" alt="">
+    </div>
+    <form class="addcontainer__form" method="POST" enctype="multipart/form-data">
+        {%csrf_token%}
+        
+        <div class="form_group">
+            <label  class="form-label">Nombre</label>
+            {% render_field form.name class+='form-control' %}
+        </div>
+<!-- 
+        <div class="form_group">
+            <label for="categorie">Album</label>
+            <select  id="categorie">
+                <option value="{{form.categorie}}"></option>
+            </select>
+            <datalist id="categorie_list">
+                <select id="categorie">
+                    {%for topics in topic%}
+                    <option value="{{topics.categorie}}">{{topics.categorie}}"</option>
+                    {%endfor%}
+                </select>
+            </datalist>
 
-    {{form.as_p}}
+        </div> -->
 
-    <input type="submit" value="Guardar">
-</form>
+        <div class="form_group">
+            <label for="exampleDataList" class="form-label">Categoria</label>
+            <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Selecione la categoria">
+            <datalist id="datalistOptions">
+                {%for topics in topic%}
+                    <option value="{{topics.name}}">
+                {%endfor%}
+            </datalist>
+        </div>
+        <div class="form_group">
+            <label for="" class="form-label">Artista</label>
+            {% render_field form.artist class+="form-control"%}
+        </div>
+    
+
+        <div class="form_group">
+            <label for="" class="form-label">Precio</label>
+            {% render_field form.price class+="form-control" placeholder="$"%}
+        </div>
+
+        <div class="form_group">
+            <label for="" class="form-label">duration</label>
+            {% render_field form.duration class+="form-control"%}
+        </div>
+
+        <div class="form_group">
+            <label for="" class="form-label">Fecha de lanzamiento</label>
+            {% render_field form.releasedate class+="form-control" placeholder="0000-00-00"%}
+            
+        </div>
+
+        <div class="form_group">
+            <label for="" class="form-label">Imagen</label>
+            {% render_field form.image class+="form-control form-control-sm" type="file"%}
+        </div>
+
+        <div class="d-grid gap-2">
+            <input type="submit" value="Guardar" class="btn btn-outline-primary">
+        </div>
+    </form>
+
+
+</div>
+
+
+
 
 {%endblock%}

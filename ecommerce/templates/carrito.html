@@ -3,6 +3,7 @@
 
 {%block content%}
 
+{% comment %} {%if request.user.id == compare%} {% endcomment %}
 <div class="containercar">
     <div class="containercar__items">
         {%for ProductsLists in ProductsList%}
@@ -13,7 +14,7 @@
             <div class="containercar__items__flex__name">
                 <p>{{ProductsLists.product}}  {{ProductsLists.product.price}}</p>
                 <p>cantidad {{ProductsLists.caramount}}</p>
-                <p class="">Total {{ntotal}}</p>
+                {% comment %} <p class="">Total {{ntotal}}</p> {% endcomment %}
             </div>
             <form class="containercar__items__flex__form" action="" method='POST'>
                 {%csrf_token%}
@@ -24,12 +25,26 @@
         </div>
         {%endfor%}
     </div>
+{% comment %} {%endif%} {% endcomment %}
     <div class="containercar__total">
         <div class="containercar__total__flex">
             <h1>Resumen del pedido</h1>
             <p>TOTAL: <span>{{PriceProduct}}</span> </p> 
             <a href="#">COMPRAR AHORA</a>
         </div>
+        {% comment %} <div class="alert alert-success d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                <div>
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+        </div> {% endcomment %}
+
         
 
     </div>

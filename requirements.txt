@@ -1,0 +1,9 @@
+aiosmtpd==1.4.4.post2
+asgiref==3.7.2
+atpublic==4.0
+attrs==23.1.0
+Django==4.2.2
+django-widget-tweaks==1.4.12
+Pillow==9.5.0
+sqlparse==0.4.4
+tzdata==2023.3

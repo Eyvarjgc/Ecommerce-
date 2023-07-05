@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ecommerce',
+    'widget_tweaks',
 ]
 AUTH_USER_MODEL  = 'ecommerce.CustomUser'
 MIDDLEWARE = [

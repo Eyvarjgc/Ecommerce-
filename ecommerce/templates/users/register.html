@@ -1,12 +1,50 @@
+{%extends 'base.html'%}
+{%load static%}
+{%load widget_tweaks%}
+{%block content%}
+<div class="containerregister">
+    <div class="containerregister__img">
+        <img src="{%static 'images/registerimg.jpg' %}" alt="">
+    </div>
 
+    <form class="containerregister__form text-white" action="" method="POST">
+        {% csrf_token %}
 
-<div>
-<p>ya posee una cuenta?</p>
-<a href="{%url 'login' %}">login</a>
+        <div class="form_group">
+            <label for="">Usuario</label>
+            {% render_field form.username class+="form-control" %}
+        </div>
+
+        <div class="form_group">
+            <label for="">Email</label>
+            {% render_field form.email class+="form-control" %}
+        </div>
+
+        <div class="form_group">
+            <label for="">Contraseña</label>
+            {% render_field form.password1 class+="form-control" %}
+        </div>
+
+        <div class="form_group">
+            <label for="">Confirmar contraseña</label>
+            {% render_field form.password2 class+="form-control" %}
+        </div>
+
+        
+        
+        <div class="d-grid gap-2">
+            <input type="submit" value="Guardar" class="btn btn-outline-primary mt-2">
+        </div>
+
+        
+        <div class="text-white">
+            <p>ya posee una cuenta?<a href="{%url 'login' %}">Click aqui</a></p>
+        </div>
+    </form>
+
 </div>
 
-<form action="" method="POST">
-    {% csrf_token %}
-    {{form}}
-    <input type="submit" name="" id="" value="Guardar">
-</form>
+
+
+{%endblock%}
+

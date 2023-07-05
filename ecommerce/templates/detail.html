@@ -9,42 +9,68 @@
 
     <form action="" mehod="GET">
         <div class="detailproduct">
-            <img class="products-image"src="{{product.image.url}}" alt="Image">
-            <p>Artista</p>
-            <p>{{product.artist}}</p>
-            <p>Album</p>
-            <p>{{product.name}}</p>
-            <p>Genero musical</p>
-            <p>{{genre}}</p>
-            <p>Duracion</p>
-            <p>{{product.duration}}</p>
-            <p>Fecha de lanzamiento</p>
-            <p>{{product.releasedate}}</p>
-            <p class="fw-bold">${{product.price}}</p>
-        
-            <input type="submit" value="AÑADIR" name="save{{product.id}}" >
+            <div class="detailproduct__img">
+                <img class="products-image"src="{{product.image.url}}" alt="Image">
+            </div>
+            <div class="detailproduct__detail">
+            
+            <p><span>Artista </span>: {{product.artist}}</p>
+            
+            <p><span>Album</span>: {{product.name}}</p>
+            
+            <p><span>Genero musical</span>: {{product.categorie.name}}</p>
+            
+            <p><span>Duracion</span>: {{product.duration}}</p>
+            
+            <p><span>Fecha de lanzamiento</span>: {{product.releasedate}}</p>
+            <p class="price">${{product.price}}</p>
+            {%if request.user.is_authenticated%}
+            <input class="añadir"type="submit" value="AÑADIR" name="save{{product.id}}" >
+            {%else%}
+            
+            <a href="{%url 'login' %}" class="añadir"  >AÑADIR</a>
+
+            {%endif%}
 
         </div>
+            
+
+        </div>
+        
     </form>
+    
+    
+<section class="containercoments">
+    <h1>Evaluaciones de clientes</h1>
 
-<section>
-    <h1>Evaluacion de clientes</h1>
+    
     {%for coments in coment%}
+    <div class="containercoments__coment">
+    <div class="containercoments__coment__header">
+        <img class="UserProfileImg"src="{{coments.host.avatar.url}}" alt="">
+        <a class="text-white"href="{%url 'profile' coments.host.id%}">@{{coments.host.name}}</a>
+        <p>{{coments.created}}</p>
+    </div>
 
-    <p>{{coments.host}}</p>
     <p>{{coments.body}}</p>
-    <p>{{coments.created|timesince}}</p>
-
+    
+    </div>
     {%endfor%}
     <form action="" method='POST'>
         <!-- {{comentpost}} -->
         {%csrf_token%}
-        <div class="mb-3">
+        <div class="mb-3 containercoments__input">
             <label for="exampleFormControlTextarea1" class="form-label">Comentar</label>
             <textarea name="body"class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <input class="calificator"type="range" min="0" max="5" step="1">
+            {%if request.user.is_authenticated%}
             <input class="btn btn-primary" type="submit" value="Submit">
+            {%else%}
+            <a href="{%url 'login' %}"class="btn btn-primary" type="submit" value="Submit">Enviar</a>
+            {%endif%}
         </div>
     </form>
+
 </section>
 
 

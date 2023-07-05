@@ -7,9 +7,6 @@
 
 <nav class="containernav">
         <ul class="containernav__ul">
-                <div class="containernav__ul__logo">
-                        <img src="{%static 'images/logo.png'%}" alt="logo">
-                </div>
                 <div class="containernav__ul__centeritem">
                         <li class=" "><a class="nav-link linka"  href="{%url 'home'%}">Inicio</a></li>
                         <li class=" "><a class="nav-link linka"  href="#">ubicacion</a></li>
@@ -20,19 +17,25 @@
                                         <input type="text" name="search" placeholder="Buscar elemento">
                                 </form>
                         </li>
+                        {%if request.user.is_superuser == 1 %}
+                        <li class="">
+                                <a class="nav-link linka"  href="{%url 'addproduct' %}">Agregar</a>
+                        </li>
+                        {%endif%}
                 </div>
                 
                         {%if request.user.is_authenticated%}
                         <div class="containernav__ul__enditem">
+
                                 <li class="">
-                                        <a class="containerimg"  href="{%url 'carrito'%}"><span>{{CarCount}}</span><img src="{%static 'images/carrito.png'%}" alt="car"></a>
+                                        <a class="containerimg"  href="{%url 'carrito' request.user.id%}"><span>{{CarCount}}</span><img src="{%static 'images/carrito.png'%}" alt="car"></a>
                                 </li>
                                 <li class="">
                                         <a class=""  href="{%url 'profile' user.id %}">
                                                 <img class="UserProfileImg"src="{{request.user.avatar.url}}" alt="">
                                         </a>
                                 </li>
-                        
+                                
                                 <!-- <li class="nav-item "><a class="nav-link"  href="{%url 'addproduct' %}">add-product</a></li> -->
                         </div>      
                 

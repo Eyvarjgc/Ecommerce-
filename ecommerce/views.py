@@ -38,43 +38,58 @@ def home(request):
                     carprice = IdProduct.price,
                     caramount = Amount
                 )
-                messages.success(request,'Producto exitosamente añadido al carrito')
-            else:
-                messages.error(request,'Error al guardar el producto')
+                # messages.success(request,'Producto exitosamente añadido al carrito')
+            # else:
+            #     messages.error(request,'Error al guardar el producto,intente iniciar sesion')
 
-    CarCount = cars.count()
+    # CarCount = cars.count()
     context = {
         'product':SearchObjects,
-        'CarCount': CarCount,
+        # 'CarCount': CarCount,
         'genre':genre,
         'numbers':numbers,
-        'favoriteproduct':favoriteproduct
+        'favoriteproduct':favoriteproduct,
     }
 
     return render(request,'home.html',context)
 
 
-def carrito(request):
-    Listproduct = car.objects.all()
-
+def carrito(request,pk):
+    ProductsList = car.objects.filter(host_id = pk)
+# [0:5]
     if request.method == 'POST':
-        for i in Listproduct:
+        for i in ProductsList:
             if request.POST.get('eliminar' + str(i.id)):
                 IdProduct = car.objects.get(id = i.id)
                 
                 IdProduct.delete()
                 return redirect('carrito')
 
-    total = 0
-    for n in Listproduct: 
-        ntotal = n.carprice * n.caramount
-        Price = ntotal
-        total += Price 
-        
+    # for product in ProductsList:
+    #     print(product.host, ':' , product.host.id)
+    #     if str(request.user.id) in str( product.host.id):
+    #         # print('product host:', product.host.id)
+    #         # print('Usuario' , request.user.id)
+    #         compare = product.host.id
+
+    Finaltotal = 0
+    long = len(ProductsList)
+    if long == 0:
+        messages.error(request,'No se ha encontrado ningun producto')
+    else:
+        for n in ProductsList:
+            eachprice = n.carprice * n.caramount
+            Finaltotal += eachprice
+            # car.get_costo(n)
+
+
+            
+
     context = {
-        'ProductsList':Listproduct,
-        'PriceProduct' : total,
-        'ntotal':ntotal
+        'ProductsList':ProductsList,
+        'PriceProduct' :  Finaltotal,
+        # 'ntotal': eachprice,
+        # 'compare':compare
     }
     return render(request,'carrito.html',context)
 
@@ -104,6 +119,7 @@ def detail(request,pk):
     product = Product.objects.get(id = pk)
     # genre = Genre.objects.get(id=pk)
     coment = product.comment_set.all()
+    
     if request.method == 'GET':
         if request.GET.get('save'):
             # return redirect('delivery')
@@ -114,6 +130,9 @@ def detail(request,pk):
                 carprice = IdProduct.price
             )
     if request.method == 'POST':
+        Getcalicator =  request.GET.get('calificator')
+        product.cal = Getcalicator
+        totalvalificator = product.cal
         message = Comment.objects.create(
             host = request.user,
             commentto = product,
@@ -131,7 +150,6 @@ def detail(request,pk):
 
 
 def login(request):
-
     return render(request,'registration/login.html')
 
 
@@ -145,12 +163,13 @@ def register(request):
             # CustomUser.save()
             # login(request,CustomUser)
             form.save()
-            return redirect('home')
+            return redirect('login')
         else:
                 messages.error(request,'no ha ingresado las contraseñas correctamente')
     context = {
         'form':form,
     }
+    
     return render(request, 'users/register.html',context)
 
 
@@ -162,19 +181,26 @@ def LogoutUser(request):
 
 def addproduct(request):
     products = ProductForm()
+    topic = Genre.objects.all()
     if request.method == 'POST':
         products = ProductForm(request.POST ,request.FILES)
         if products.is_valid:
             products.save()
             return redirect('home')
+        else:
+            messages.error(request,'El producto no se ha agregado')
 
-    return render(request,'add-product.html',{'form':products})
+    return render(request,'add-product.html',{'form':products,'topic':topic})
 
 
 def profile(request,pk):
     user = CustomUser.objects.get(id = pk)
+    carinuser = car.objects.all()
+    userproducts = user.car_set.all()
     context = {
-        'user':user
+        'user':user,
+        'carinuser':carinuser,
+        'userproducts':userproducts,
     }
     return render(request,'users/profile.html',context)
 

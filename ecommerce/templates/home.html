@@ -35,18 +35,35 @@
                 <p class="price">${{products.price}}</p>
                 
             </div>
-
             <div class="save">
                 <form method="get" action="{% url 'updateamount' %}">
                     <input class="amount" type="number" name="cantidad" value="{{ products.amount }}" min="1">
                 </form>
+                {%if request.user.is_authenticated%}
                 <input class="enviar"type="submit" value="AÑADIR" name="save{{products.id}}" >
+                {%else%}
+                <a href="{%url 'login' %}" class="enviar"type="submit" name="save{{products.id}}" >AÑADIR</a>
+                {%endif%}
             </div>
+            
         </div>
     </form>
 {%endfor%}
 </div>
 
 <script src="{%static 'js/contador.js'%}"></script>
+
+{% comment %} <div class="alert alert-success d-flex align-items-center" role="alert">
+    <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+        <div>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+</div> {% endcomment %}
 
 {%endblock%}

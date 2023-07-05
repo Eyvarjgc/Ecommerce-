@@ -10,16 +10,24 @@
     
         <form action="" mehod="GET">
             <div class="products">
-                <img class="products-image" src="{{products.image.url}}" alt="Image">
+                <a class="products__containerimage" href="{% url 'detail' products.id %}">
+                    <img class="products__containerimage__image"src="{{products.image.url}}" alt="Image">
+                </a>
                 <p>{{products.artist}}</p>
                 <p>{{products.name}}</p>
                 <p class="fw-bold">${{products.price}}</p>
             </div>
+            {%if request.user.is_authenticated%}
             <div class="save">
                 <input type="submit" value="AÑADIR" name="save{{products.id}}" >
             </div>
-            
+            {%else%}
+            <div class="save">
+                <a href="{%url 'login' %}"type="submit" value="AÑADIR" name="save{{products.id}}" >AÑADIR</a>
+            </div>
+            {%endif%}
         </form>
+
     
     {%endfor%}
     </div>

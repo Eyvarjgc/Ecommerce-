@@ -22,7 +22,8 @@ urlpatterns = [
 
 
     # PAGES
-    path('carrito/', views.carrito,name='carrito'),
+    # path('carrito/', views.carrito,name='carrito'),
+    path('carrito/<pk>', views.carrito,name='carrito'),
     path('addproduct/',views.addproduct,name="addproduct"),
     path('profile/<str:pk>',views.profile,name='profile'),
     path('genre/<pk>',views.genre,name='genre'),

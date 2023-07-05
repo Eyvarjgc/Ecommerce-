@@ -2,8 +2,23 @@
 
 
 {%block content%}
+<div class="containerprofile">
+    <div class="containerprofile__user">
+        <p class="text-capitalize">{{user}}</p>
+        {%if request.user.id == user.id%}
+        <a class="nav-link"  href="{%url 'LogoutUser' %}">Logout</a>
+        {%endif%}
+    </div>
+    {%if request.user.id == user.id%}
+    <a href="{%url 'password_reset' %}">Cambiar contraseña</a>
+    {%endif%}
+    <p class="pedidos text-uppercase">-PEDIDOS-</p>
+    {%for userproduct in userproducts%}
 
-{{user}}
-<li class="nav-item "><a class="nav-link"  href="{%url 'LogoutUser' %}">Logout</a></li>
-<a href="{%url 'password_reset' %}">Cambiar contraseña</a>
+    <a class="pedidos__items" src="#">
+        {{userproduct.product}}
+    </a>
+
+    {%endfor%}
+</div>
 {%endblock%}

@@ -18,6 +18,10 @@ class ProductForm(ModelForm):
         model = Product
         fields = '__all__'
 
+    # def __init__(self,*args,**kargs):
+    #     super().__init__(*args,**kargs)
+    #     self.fields['name'].widget.attrs.update({'class': 'form-control'})
+
 class changepassword(SetPasswordForm):
     class Meta:
         model = get_user_model()
