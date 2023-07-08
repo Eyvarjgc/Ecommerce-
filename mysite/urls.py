@@ -34,7 +34,12 @@ urlpatterns = [
     name='password_reset_confirm'),path('reset/done/',auth_views.PasswordResetCompleteView.as_view(template_name='registration/reset_complete.html'),name='password_reset_complete'),
 
 
+    # ---API---
+    path('api', include('api.urls')),
+    # path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 
+    # ---API2---
+    path('api2/',include('api2.urls'))
 
 
 

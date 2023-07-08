@@ -29,4 +29,6 @@ urlpatterns = [
     path('genre/<pk>',views.genre,name='genre'),
     path('detail/<pk>',views.detail,name='detail'),
     path('updateamount', views.updateamount,name='updateamount'),
+    
+
 ]

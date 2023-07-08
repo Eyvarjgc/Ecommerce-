@@ -214,10 +214,6 @@ def updateamount(request):
     return render(request,'updateamount.html',{'form':form})
 
 
-
-
-
-
 # @login_required
 # def change_password(request):
 #     user = request.user
@@ -260,3 +256,6 @@ def updateamount(request):
 #         'form':form
 #     }
 #     return render(request, 'reset_password.html', context)
+
+
+

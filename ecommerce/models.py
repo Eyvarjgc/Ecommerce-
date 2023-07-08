@@ -34,6 +34,13 @@ class Product(models.Model):
     releasedate = models.DateField(("Fecha lanzado"), auto_now=False, auto_now_add=False,null=True)
     amount = models.PositiveIntegerField(("Cantidad"), default=1)
     cal = models.IntegerField(("Calificacion"),validators=[MinValueValidator(1), MaxValueValidator(5)],default=1)
+    
+    @property
+    def get_discount(self):
+        return '%2f' %(float(self.price) * float(self.amount))
+        
+
+
     def __str__(self) -> str:
         return self.name
 
